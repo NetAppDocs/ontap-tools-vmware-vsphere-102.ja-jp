@@ -1,0 +1,79 @@
+---
+permalink: upgrade/upgrade-ontap-tools.html 
+sidebar: sidebar 
+keywords: upgrade 
+summary: アップグレードは、HA構成と非HA構成の両方でサポートされます。 
+---
+= ONTAP Tools for VMware vSphere 10.xから10.2へのアップグレード
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+アップグレードは、HA構成と非HA構成の両方でサポートされます。
+
+
+NOTE: ONTAP tools for VMware vSphere 10.0を10.2リリースにアップグレードするには、まずONTAP tools for VMware vSphere 10.1にアップグレードしてから10.2リリースにアップグレードする必要があります。
+
+* 始める前に *
+
+ONTAP tools for VMware vSphere 10.0から10.1にアップグレードする場合は、アップグレードタスクを開始する前に次の手順を完了する必要があります。
+
+*診断を有効にする*
+
+. vCenter Serverで、ONTAP toolsへのコンソールを開きます。
+. maintenanceユーザとしてログインします。
+. 「* 4 *」と入力して[Support and Diagnostics]を選択します。
+. 「* 2 *」と入力して[リモート診断アクセスを有効にする]を選択します。
+. 「* y *」と入力して、任意のパスワードを設定します。
+. ターミナル/puttyから、前の手順で設定した「diag」とパスワードでVM IPアドレスにログインします。
+
+
+* MongoDBのバックアップを取る*
+
+次のコマンドを実行して、MongoDBのバックアップを作成します。
+
+* kn exec-it ntv-MongoDB-0 sh-kNはkubectl -n ntv-systemの別名である。
+* env | grep MongoDB_root_password -ポッド内でこのコマンドを実行します。
+* 'exit'-これを実行してポッドから出ます。
+* KN exec NTV-MongoDB-0--mongodump -u root -p MongoDB_root_password --archive=/tmp/ mongodb-backup.gz --gzip -このコマンドを実行して、上記のコマンドで設定したMongo_root_passwordを置き換えます。
+* kn cp ntv-mongodb-0：/tmp/ mongodb-backup.gz ./ mongodb-backup.gz -このコマンドを実行して、上記のコマンドを使用して作成したMongoDBバックアップをポッドからホストにコピーします。
+
+
+*すべてのボリュームのスナップショットを作成する*
+
+* 「kN get pvc」コマンドを実行し、コマンドの出力を保存します。
+* 次のいずれかの方法で、すべてのボリュームのSnapshotを1つずつ作成します。
++
+** CLIから次のコマンドを実行します。_volume snapshot create -vserver <vserver_name>-volume <volume_name>-snapshot <snapshot_name>_
+** ONTAP System Managerのユーザインターフェイスで、検索バーの名前でボリュームを検索し、名前をクリックしてボリュームを開きます。[Snapshot]に移動し、そのボリュームのSnapshotを追加します。
+
+
+
+
+* vCenterでVMware vSphere VM用のONTAPツールのスナップショットを作成します（HA導入の場合は3 VM、非HA導入の場合は1 VM）*
+
+* vSphere Clientユーザインターフェイスで、VMを選択します。
+* [Snapshots]タブに移動し、*[Take Snapshot]*ボタンをクリックします。
+
+
+「generate-support-bundle-job」というプレフィックスが付いた完了したポッドをログバンドルから削除してから、アップグレードを実行します。サポートバンドルの生成を実行中の場合は、完了してからポッドを削除します。
+
+* 手順 *
+
+. ONTAP tools for VMware vSphereアップグレードISOをコンテンツライブラリにアップロードします。
+. プライマリVMページで、*[Actions]*>*[Edit Settings]*を選択します。
+. [設定の編集]ウィンドウの[*CD/DVDドライブ*]フィールドで、[コンテンツライブラリISOファイル]を選択します。
+. ISOファイルを選択し、* OK *をクリックします。[CD/DVDドライブ]フィールドで[接続済み]チェックボックスを選択します。image:../media/primaryvm-edit-settings.png["設定を編集します"]
+. vCenter Serverで、ONTAP toolsへのコンソールを開きます。
+. maintenanceユーザとしてログインします。
+. 「* 3 *」と入力して、[システム設定]メニューを選択します。
+. 「* 7 *」と入力して、アップグレードオプションを選択します。
+. をアップグレードすると、次の処理が自動的に実行されます。
++
+.. 証明書のアップグレード
+.. プラグインのリモートアップグレード
+
+
+

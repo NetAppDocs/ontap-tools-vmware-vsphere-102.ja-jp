@@ -1,0 +1,42 @@
+---
+permalink: manage/delete-deployment.html 
+sidebar: sidebar 
+keywords: ONTAP tools,Storage Replication Adapter 
+summary: ONTAP tools for VMware vSphereの導入環境を削除したら、導入時に作成されたFlexVolをクリーンアップする必要があります。導入に専用のONTAPクラスタを使用していた場合は、FlexVolをクリーンアップする必要があります。導入によって大量のFlexVolが作成され、使用されないためパフォーマンスが低下します。 
+---
+= ボリュームをクリーンアップ
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP tools for VMware vSphereの導入環境を削除したら、導入時に作成されたFlexVolをクリーンアップする必要があります。導入に専用のONTAPクラスタを使用していた場合は、FlexVolをクリーンアップする必要があります。導入によって大量のFlexVolが作成され、使用されないためパフォーマンスが低下します。
+
+次のガイドラインに従って、ONTAP tools for VMware vSphere環境の削除後にFlexVolをクリーンアップします。
+
+.手順
+. ONTAP tools for VMware vSphereのプライマリノードVMで、次のコマンドを実行して導入タイプを特定します。
++
+_cat /opt/netapp/meta/ansible vars.yaml | grep -i protocol_
+
++
+iSCSI環境の場合は、igroupも削除する必要があります。
+
+. 次のコマンドを使用して、導入時にONTAPで作成されたFlexVolのリストを取得します。
++
+_kubectl describe persistentvolumes | grep internalName | awk -F'=''｛print $2｝'_
+
+. vCenter ServerからのVMの削除（を参照） https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vm_admin.doc/GUID-27E53D26-F13F-4F94-8866-9C6CFA40471C.html["vCenter ServerまたはデータストアからのVMまたはVMテンプレートの削除"]
+. ONTAP System Managerからボリュームを削除します。を参照してください。 https://docs.netapp.com/us-en/ontap/volumes/delete-flexvol-task.html["FlexVol volumeの削除"]ボリュームを削除するには、CLIコマンドでFlexVolの正確な名前を指定します。
+. iSCSIを導入する場合は、ONTAPからSAN igroupを削除します。を参照してください。 https://docs.netapp.com/us-en/ontap/san-admin/manage-san-initiators-task.html["SANイニシエータとigroupの表示と管理"]
++
+HA構成では4つのigroupが作成され、非HA構成では2つのigroupが作成されます。次のコマンドを実行して、最初のigroup名を確認します。
+
++
+_kubectl -n trident get tbc trident-backend -o yaml | grep igroupName：|awk -F'：''｛print $2｝'_
+
++
+その他のigroup名は、VMのホスト名から始まります。
+
+

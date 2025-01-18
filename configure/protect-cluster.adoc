@@ -1,0 +1,54 @@
+---
+permalink: configure/protect-cluster.html 
+sidebar: sidebar 
+keywords: vVols datastore,delete vVol 
+summary: ONTAP Tools for VMware vSphereは、ホストクラスタの保護を管理します。 
+---
+= ホストクラスタの保護の作成
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+:firstname: [.lead]
+:author: [.lead]
+:authorinitials: [
+:authors: [.lead]
+
+
+ONTAP Tools for VMware vSphereは、ホストクラスタの保護を管理します。選択したSVMに属し、クラスタの1つ以上のホストにマウントされているすべてのデータストアが、ホストクラスタで保護されます。
+
+.前提条件
+次の前提条件が満たされていることを確認します。
+
+* ホストクラスタには、1つのSVMのデータストアだけが含まれます。
+* ホストクラスタにマウントされたデータストアは、クラスタ外のどのホストにもマウントしないでください。
+* ホストクラスタにマウントされたすべてのデータストアは、iSCSI / FCプロトコルを使用するVMFSデータストアである必要があります。NVMe/FCおよびNVMe/TCPプロトコルのVMFSデータストアはサポートされません。
+* ホストクラスタにマウントされたデータストアを形成しているFlexVol / LUNを、既存の整合グループ（CG）に含めないでください。
+* ホストクラスタにマウントされているデータストアを形成するFlexVol / LUNを、既存のSnapMirror関係に含めないでください。
+* ホストクラスタには少なくとも1つのデータストアが必要です。
+
+
+.手順
+. 次のコマンドを使用してvSphere Clientにログインします。 `\https://vcenterip/ui`
+. ホストクラスタを右クリックし、* NetApp ONTAP tools *>* Protect Cluster *を選択します。
+. [クラスタの保護]ウィンドウで、データストアタイプとソースStorage Virtual Machine（VM）の詳細が自動的に入力されます。[データストア]リンクを選択すると、保護されているデータストアが表示されます。
+. 整合グループ名*を入力します。
+. [関係の追加]*を選択します。
+. [ SnapMirror関係の追加]*ウィンドウで、*[ターゲットStorage VM]*と*[ポリシー]*タイプを選択します。
++
+ポリシータイプはAsynchronousまたはAutomatedFailOverDuplexのいずれかです。
+
++
+SnapMirror関係をAutomatedFailOverDuplexタイプのポリシーとして追加する場合は、ターゲットStorage VMをストレージバックエンドとしてONTAP tools for VMware vSphereが導入されているvCenterに追加する必要があります。
+
++
+AutomatedFailOverDuplexポリシータイプには、均一なホスト構成と非均一なホスト構成があります。[ホストの均一設定]トグルボタンを選択すると、ホストイニシエータグループの設定がターゲットサイトに暗黙的にレプリケートされます。詳細については、を参照してください。link:../concepts/ontap-tools-concepts-terms.html["主要な概念と用語"]
+
+. 不均一なホスト構成を選択した場合は、そのクラスタ内の各ホストのホストアクセス（ソース/ターゲット）を選択します。
+. 「 * 追加」を選択します。
+. [クラスタの保護]*ウィンドウでは、作成時に削除操作のみがサポートされます。保護を削除して再度追加することができます。ホストクラスタの保護を変更する処理では、編集オプションを使用できます。ケバブメニューオプションを使用して'関係を編集または削除できます
+. [保護]*ボタンを選択します。
++
+vCenterタスクがジョブIDの詳細で作成され、進捗状況が[Recent tasks]パネルに表示されます。これは非同期タスクで、ユーザーインターフェイスにはリクエスト送信ステータスのみが表示され、タスクの完了を待たずに表示されます。
+
+. 保護されているホストクラスタを表示するには、* NetApp ONTAP tools *>* Protection *>* Host cluster relationships *に移動します。
+

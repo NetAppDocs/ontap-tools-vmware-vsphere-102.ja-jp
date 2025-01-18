@@ -1,0 +1,59 @@
+---
+permalink: configure/add-storage-backend.html 
+sidebar: sidebar 
+keywords:  
+summary: ストレージバックエンドは、ESXiホストがデータストレージに使用するシステムです。 
+---
+= ストレージバックエンドを追加します
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ストレージバックエンドは、ESXiホストがデータストレージに使用するシステムです。ストレージバックエンドは、ONTAP tools ManagerまたはvSphere Client UIを使用して追加できます。
+
+* このタスクについて *
+
+このタスクは、ONTAPクラスタをオンボードする際に役立ちます。ONTAP tools Managerを使用してストレージバックエンドを追加すると、ストレージバックエンドがグローバルクラスタに追加されます。グローバルクラスタをvCenter Serverインスタンスに関連付けて、SVMユーザにvVolデータストアのプロビジョニングを許可します。
+
+[role="tabbed-block"]
+====
+.ONTAP tools Managerの使用
+--
+
+NOTE: ストレージバックエンドは、ONTAP tools ManagerまたはONTAP tools APIから追加するとグローバルになります。ストレージバックエンドは、vCenter Server APIから追加したときにローカルになります。たとえば、マルチテナントセットアップでは、SVMユーザクレデンシャルを使用するために、ストレージバックエンド（クラスタ）をグローバルに、SVMをローカルに追加できます。
+
+* 手順 *
+
+. WebブラウザからONTAP Tools Managerを起動します。 `\https://loadBalanceIP:8443/virtualization/ui/`
+. 導入時に指定したONTAP tools for VMware vSphere管理者のクレデンシャルを使用してログインします。
+. サイドバーから* Storage backends *を選択します。
+. 「 * 追加」を選択します。
+. サーバのIPアドレスまたはFQDN、ユーザ名、パスワードを入力し、*[追加]*を選択します。
++
+
+NOTE: IPv4とIPv6の管理LIFがサポートされます。管理LIFを使用するSVMユーザベースのクレデンシャルもサポートされます。
+
+
+
+--
+.vSphere Client UIノシヨウ
+--
+
+NOTE: vSphere Client UIを使用してストレージバックエンドを追加した場合、vVolデータストアでSVMユーザを直接追加することはできません。
+
+. 次のコマンドを使用してvSphere Clientにログインします。 `\https://vcenterip/ui`
+. ショートカットページで、プラグインセクションの* NetApp ONTAP tools *をクリックします。
+. ONTAP toolsの左側のペインで、*[ストレージバックエンド]*に移動し、*[追加]*を選択します。
+. [ストレージバックエンドの追加]*ウィンドウで、サーバのIPアドレス、ユーザ名、パスワード、およびポートの詳細を指定し、*[追加]*をクリックします。
++
+
+NOTE: クラスタベースのクレデンシャルとIPv4およびIPv6の管理LIFを追加するか、SVMの管理LIFにSVMベースのクレデンシャルを指定して、SVMユーザを直接追加できます。
+
+
+
+リストが更新され、新しく追加されたストレージバックエンドがリストに表示されます。
+
+--
+====

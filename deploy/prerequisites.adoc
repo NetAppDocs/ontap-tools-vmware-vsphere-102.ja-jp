@@ -1,0 +1,163 @@
+---
+permalink: deploy/prerequisites.html 
+sidebar: sidebar 
+keywords: ONTAP tools,Storage Replication Adapter 
+summary: ONTAP tools for VMware vSphereを導入する前に、導入パッケージのスペース要件とホストシステムのいくつかの基本的な要件を理解しておく必要があります。 
+---
+= ONTAP tools for VMware vSphere導入の前提条件
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP tools for VMware vSphereを導入する前に、導入パッケージのスペース要件とホストシステムのいくつかの基本的な要件を理解しておく必要があります。
+
+ONTAP Tools for VMware vSphereは、VMware vCenter Server Virtual Appliance（vCSA）で使用できます。ONTAP Tools for VMware vSphereは、ESXiシステムを含むサポートされているvSphere Clientに導入する必要があります。
+
+
+
+== システム要件
+
+* *ノードあたりのインストールパッケージのスペース要件*
++
+** シンプロビジョニング環境の場合は10GB
+** シックプロビジョニングの場合は248GB
+
+
+* *ノードあたりのホストシステムのサイジング要件*導入サイズおよびノードあたりの推奨メモリは次の表のとおりです。
+
+
+|===
+
+
+| *展開の種類* | * CPU * | *メモリ（GB）* 
+
+
+| 小（S） | 8 | 16 
+
+
+| 中（M） | 12 | 24 
+
+
+| 大（L） | 16 | 32 
+|===
+詳細については、後述の「ONTAP tools for VMware vSphereを導入する際の構成の制限」セクションを参照してください。
+
+
+
+== ストレージとアプリケーションの最小要件
+
+|===
+| ストレージ、ホスト、およびアプリケーション | 最小バージョン要件 
+
+
+| ONTAP | ONTAP 9の最新パッチリリース。12.1、9.13.1、9.14.1、および9.15.1。 
+
+
+| ESXiホスト | ESXi 7.0.3 
+
+
+| vCenterサーバ | vCenter 7.0U3 
+
+
+| VASA Provider | 3.0 
+
+
+| OVAアプリケーション | 10.2 
+|===
+サポートされるONTAP、vCenter Server、ESXiホスト、およびプラグインアプリケーションのバージョンの最新情報については、Interoperability Matrix Tool（IMT）を参照してください。
+
+https://imt.netapp.com/matrix/imt.jsp?components=105475;&solution=1777&isHWU&src=IMT["Interoperability Matrix Tool"^]
+
+
+
+== ONTAP tools for VMware vSphereを導入するための構成の制限
+
+次の表は、VMware vSphere用のONTAP toolsを設定する際のガイドとして使用できます。
+
+|===
+
+
+| * 導入 * | * タイプ * | * VVOLの数* | *ホスト数* | *プロトコルタイプ* 
+
+
+| 容易な導入 | 小（S） | ~12、000 | 32 | NFS、iSCSI 
+
+
+| 容易な導入 | 中（M） | 最大24、000 | 64 | NFS、iSCSI 
+
+
+| 高可用性 | 小（S） | 最大24、000 | 64 | NFS、iSCSI 
+
+
+| 高可用性 | 中（M） | 約50k | 128 | NFS、iSCSI 
+
+
+| 高可用性 | 大（L） | ~100k | 256 [注]表のホスト数は、複数のvCenterからのホストの総数を示しています。 | NFS、iSCSI 
+|===
+ノードごとのホストシステムのサイジング要件の詳細については、を参照してくださいlink:../deploy/prerequisites.html["ONTAP Tools for VMware vSphereを導入するための前提条件"]。
+
+
+
+== ONTAP Tools for VMware vSphere - Storage Replication Adapter（SRA）
+
+次の表に、ONTAP tools for VMware vSphereを使用したVMware Live Site Recoveryインスタンスごとにサポートされる数を示します。
+
+|===
+| * vCenterの導入規模* | *小さい* | *中* 
+
+
+| アレイベースのレプリケーションを使用した保護用に構成された仮想マシンの総数 | 2000 | 5000 
+
+
+| アレイベースのレプリケーション保護グループの総数 | 250 | 250 
+
+
+| リカバリプランあたりの保護グループの総数 | 50 | 50 
+
+
+| レプリケートされたデータストア数 | 255 | 255 
+
+
+| VM数 | 4000 | 7000 
+|===
+次の表に、VMware Live Site Recoveryの数と、VMware vSphereの導入規模に対応するONTAPツールを示します。
+
+|===
+
+
+| * VMware Live Site Recoveryインスタンスの数* | * ONTAPツールの導入規模* 
+
+
+| 最大4 | 小規模 
+
+
+| 4～8 | 中 
+
+
+| 8人以上 | 大規模 
+|===
+詳細については、を参照してください https://docs.vmware.com/en/VMware-Live-Recovery/services/vmware-live-site-recovery/GUID-3AD7D565-8A27-450C-8493-7B53F995BB14.html["VMware Live Site Recoveryの運用上の制限"]。
+
+
+
+== 導入前のチェック
+
+導入を進める前に、次の項目が揃っていることを確認してください。
+
+* vCenter Server環境がセットアップおよび設定されている。
+* (オプション)自動化のために、ユーザNetApp提供のPostmanコレクションJSONファイルが収集されます。
+* OVAを導入するための親vCenter Serverのクレデンシャルが設定されている。
++
+
+NOTE: vCenter Serverの親のパスワードに特殊文字（$、'、"）を使用することはできません。
+
+* ONTAP tools for VMware vSphereが導入後に接続するvCenter Serverインスタンスの登録用ログインクレデンシャルを用意しておきます。
+* ブラウザキャッシュが削除されます。
+* 非HA環境に使用できる空きIPアドレスが3つあることを確認します。1つはロードバランサ用の空きIPアドレス、もう1つはKubernetesコントロールプレーン用の空きIPアドレス、もう1つはノード用のIPアドレスです。HA環境では、これら3つのIPアドレスとともに、2番目と3番目のノード用にさらに2つのIPアドレスが必要になります。HA構成と非HA構成の両方でを割り当てる前に、DNSの空きIPアドレスにホスト名をマッピングする必要があります。HA構成の5つのIPアドレスと非HA構成の3つのIPアドレスはすべて、導入用に選択したVLAN上にある必要があります。
+
+
+* カスタムCA証明書が必須であるvCenterが複数ある環境では、証明書が発行されるドメイン名が仮想IPアドレスにマッピングされていることを確認します。ドメイン名に対して_nslookup_checkが実行され、ドメインが目的のIPアドレスに解決されているかどうかが確認されます。証明書は、ロードバランサのIPアドレスのドメイン名とIPアドレスを使用して作成する必要があります。
+* 非HAの高度なHA構成およびHA構成でONTAP Tools for VMware vSphere 10.2をインストールする前に、次の技術情報アーティクルを確認してください。 https://kb.netapp.com/on-prem/ontap/da/NAS/NAS-KBs/pre-requisites_for_installing_OTV_10.1_and_10.2_in_NonHA_Advanced_and_HA["HAイカイノコウシントHAコウセイノシヨウケン"]
+

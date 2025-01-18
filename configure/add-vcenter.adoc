@@ -1,0 +1,37 @@
+---
+permalink: configure/add-vcenter.html 
+sidebar: sidebar 
+keywords:  
+summary: vCenter Serverインスタンスは、ホスト、仮想マシン（VM）、ストレージバックエンドを制御できる一元管理プラットフォームです。 
+---
+= vCenter Serverインスタンスの追加
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+vCenter Serverは、ホスト、仮想マシン（VM）、およびストレージバックエンドを制御できる一元管理プラットフォームを提供します。
+
+* このタスクについて *
+
+ONTAP tools for VMware vSphereの1つのインスタンスを使用して、複数のvCenter Serverインスタンスを追加および管理できます。
+
+* 手順 *
+
+. WebブラウザからONTAP Tools Managerを起動します。 `\https://loadBalanceIP:8443/virtualization/ui/`
+. 導入時に指定したONTAP tools for VMware vSphere管理者のクレデンシャルを使用してログインします。
+. サイドバーから* vCenters *を選択します。
+. vCenter Serverインスタンスをオンボードするには*[追加]*を選択し、vCenterのIPアドレス/ホスト名、ユーザ名、パスワード、およびポートの詳細を指定します。
+
+
+vCenter ServerインスタンスをONTAP toolsに追加すると、次の処理が自動的に実行されます。
+
+* vCenter Client Plug-inが登録されている
+* プラグインとAPIのカスタム権限がvCenter Serverインスタンスにプッシュされる
+* ユーザを管理するためのカスタムロールが作成されます。
+
+
+vCenter Serverインスタンスを追加すると、ONTAP tools for VMware vSphereプラグインがリモートプラグインとしてvCenter Serverに自動的に登録されます。プラグインは、vSphereユーザインターフェイスのショートカットに表示されます。
+
+プラグインは、vCenter Serverインスタンスへのキー_com.netapp.otv_で登録され、vCenter ServerインスタンスのExtensionManagerで確認できます。

@@ -1,0 +1,28 @@
+---
+permalink: configure/associate-storage-backend.html 
+sidebar: sidebar 
+keywords:  
+summary: 情報が必要です。 
+---
+= ストレージバックエンドとvCenter Serverインスタンスの関連付け
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+vCenter Serverのリストページには、関連するストレージバックエンドの数が表示されます。各vCenter Serverインスタンスには、ストレージバックエンドを関連付けるオプションがあります。
+
+* このタスクについて *
+
+このタスクでは、ストレージバックエンドとオンボードされたvCenter Serverインスタンスの間のマッピングをグローバルに作成できます。
+
+* 手順 *
+
+. WebブラウザからONTAP Tools Managerを起動します。 `\https://loadBalanceIP:8443/virtualization/ui/`
+. 導入時に指定したONTAP tools for VMware vSphere管理者のクレデンシャルを使用してログインします。
+. サイドバーから[vCenter]を選択します。
+. ストレージバックエンドに関連付けるvCenterの縦の省略記号をクリックします。
+. ポップアップのドロップダウンからストレージバックエンドを選択します。
+. vCenter Serverインスタンスを必要なストレージバックエンドに関連付けるには、*[ストレージバックエンドの関連付け]*オプションを選択します。
+

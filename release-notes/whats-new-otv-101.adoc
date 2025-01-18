@@ -1,0 +1,50 @@
+---
+permalink: release-notes/whats-new-otv-102.html 
+sidebar: sidebar 
+keywords: 'what"s new, release notes, otv, 10.2, ONTAP tools for VMware vSphere' 
+summary: ONTAP Tools for VMware vSphere 10.2の新機能について説明します。 
+---
+= ONTAP Tools for VMware vSphere 10.2の新機能
+:allow-uri-read: 
+
+
+[role="lead"]
+ONTAP Tools for VMware vSphere 10.2の新機能について説明します。
+
+[cols="30%,70%"]
+|===
+| 更新 | 製品説明 
+
+
+ a| 
+xref:../manage/storage-view-datastore.html#ontap-storage-views-for-nfs-datastores[NVMeプロトコルのサポート]
+ a| 
+ONTAP Tools for VMware vSphere 10.2は、VMFSデータストアのプロビジョニングでNVMe/FCプロトコルとNVMe/TCPプロトコルの両方をサポートしています。vCenterインターフェイス内にシームレスに統合されたワークフローにより、データストアのプロビジョニングが容易になります。NVMe/FCプロトコルとNVMe/TCPプロトコルを使用してVMFSデータストアをプロビジョニングするメリットには、パフォーマンスの最適化、優れた拡張性、複数のデータ要求の効率的な処理、レイテンシの大幅な削減、効率的なリソース管理などがあります。NVMeベースのストレージIOは、従来のデータプロトコルに比べてCPU利用率が最大50%低下します。
+
+
+
+ a| 
+xref:../configure/create-vvols-datastore.html[ファイバチャネル（FC）プロトコルのサポート]
+ a| 
+ONTAP Tools for VMware vSphere 10.2では、VVOLデータストアとVMFSデータストアのプロビジョニングにFCプロトコルがサポートされています。FCプロトコルのサポートには、高いパフォーマンス、信頼性と安定性、拡張性、セキュリティの強化、効率的なリソース管理などのメリットがあります。
+
+
+
+ a| 
+xref:../configure/protect-cluster.html[SnapMirrorアクティブ同期]
+ a| 
+VMware vSphere 10.2向けのONTAPツールによるSnapMirrorアクティブ同期のサポートには、vCenter UI内でvSphere Metro Storageを構築するためのエンドツーエンドの設定ワークフローを提供する、まったく新しい保護クラスタ機能が含まれています。これにより、拡張されたクラスタ構成が可能になり、サイト全体に障害が発生してもビジネスサービスの運用が継続され、アプリケーションがセカンダリコピーを使用して透過的にフェイルオーバーできるようになります。
+
+[NOTE]
+====
+SnapMirrorウィザードでは、SnapMirrorのアクティブな同期に加えて、SnapMirrorの非同期と同期を設定できます。
+
+====
+
+
+ a| 
+xref:../protect/enable-storage-replication-adapter.html[Storage Replication Adapter（SRA）の機能拡張]
+ a| 
+SRAは、VMware Site Recovery Manager（SRM）仕様に基づいたディザスタリカバリ（DR）ソリューションを実装します。SRM統合によるSnapMirrorアクティブ同期は、ディザスタリカバリ計画とオーケストレーションソリューションをサポートし、透過的なアプリケーションフェイルオーバーを実現します。
+
+|===

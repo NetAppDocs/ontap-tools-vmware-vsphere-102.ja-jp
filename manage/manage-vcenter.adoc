@@ -1,0 +1,64 @@
+---
+permalink: manage/manage-vcenter.html 
+sidebar: sidebar 
+keywords:  
+summary: vCenterは、ホスト、仮想マシン、およびストレージバックエンドを制御できる一元管理プラットフォームです。 
+---
+= vCenter Serverインスタンスの管理
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+vCenter Serverインスタンスは、ホスト、仮想マシン、ストレージバックエンドを制御できる一元管理プラットフォームです。
+
+
+
+== ストレージバックエンドをvCenter Serverインスタンスに関連付けまたは関連付け解除する
+
+vCenter Serverのリストページには、関連するストレージバックエンドの数が表示されます。各vCenter Serverインスタンスには、ストレージバックエンドを関連付けまたは関連付け解除するオプションがあります。このタスクでは、ストレージバックエンドとオンボードされたvCenter Serverインスタンスの間のマッピングをグローバルに作成できます。
+
+* 手順 *
+
+. WebブラウザからONTAP Tools Managerを起動します。 `\https://loadBalanceIP:8443/virtualization/ui/`
+. 導入時に指定したONTAP tools for VMware vSphere管理者のクレデンシャルを使用してログインします。
+. サイドバーから必要なvCenter Serverインスタンスを選択します。
+. ストレージバックエンドに関連付ける、またはストレージバックエンドとの関連付けを解除するvCenter Serverの縦の省略記号をクリックします。
+. 実行するアクションに応じて*[ストレージバックエンドの関連付け]または[関連付け解除]*を選択します。
+
+
+
+
+== vCenter Serverインスタンスを変更する
+
+vCenter Serverインスタンスを変更するには、次の手順を実行します。
+
+. WebブラウザからONTAP Tools Managerを起動します。 `\https://loadBalanceIP:8443/virtualization/ui/`
+. 導入時に指定したONTAP tools for VMware vSphere管理者のクレデンシャルを使用してログインします。
+. サイドバーから該当するvCenter Serverインスタンスを選択します。
+. 変更するvCenter Serverの縦の省略記号をクリックし、*[変更]*を選択します。
+. vCenter Serverインスタンスの詳細を変更し、*[変更]*を選択します。
+
+
+
+
+== vCenter Serverインスタンスを削除する
+
+vCenter Serverを削除する前に、vCenter Serverに接続されているすべてのストレージバックエンドを削除する必要があります。
+
+. WebブラウザからONTAP Tools Managerを起動します。 `\https://loadBalanceIP:8443/virtualization/ui/`
+. 導入時に指定したONTAP tools for VMware vSphere管理者のクレデンシャルを使用してログインします。
+. サイドバーから該当するvCenter Serverインスタンスを選択します。
+. 削除するvCenter Serverの縦の省略記号をクリックし、*[削除]*を選択します。
++
+
+NOTE: vCenter Serverインスタンスを削除すると、それらのインスタンスはアプリケーションで管理されなくなります。
+
+
+
+ONTAP toolsでvCenter Serverインスタンスを削除すると、次の処理が自動的に実行されます。
+
+* プラグインの登録が解除されました。
+* プラグイン権限とプラグインロールが削除されました。
+

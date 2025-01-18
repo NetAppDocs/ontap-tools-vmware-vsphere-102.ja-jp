@@ -1,0 +1,89 @@
+---
+permalink: concepts/vcenter-server-role-based-access-control-features.html 
+sidebar: sidebar 
+keywords:  
+summary: vCenter ServerのRole-Based Access Control（RBAC；ロールベースアクセス制御）を使用すると、vSphereオブジェクトへのアクセスを制御できます。 
+---
+= ONTAP tools for VMware vSphereでのロールベースアクセス制御の概要
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+vCenter Serverには、vSphereオブジェクトへのアクセスを制御するためのRole-Based Access Control（RBAC；ロールベースアクセス制御）が用意されています。vCenter Serverは、ロールとPrivilegesでユーザ権限とグループ権限を使用して、インベントリ内のさまざまなレベルで一元的な認証および承認サービスを提供します。
+
+|===
+
+
+| コンポーネント | 製品説明 
+
+
+| 権限 | vSphereで操作を実行するためのアクセスを有効または拒否します。 
+
+
+| 役割 | ロールには、1つ以上のシステム権限が含まれています。各権限は、システム内の特定のオブジェクトまたはタイプのオブジェクトに対する管理権限を定義します。ユーザにロールを割り当てると、そのロールで定義されている権限の機能が継承されます。 
+
+
+| ユーザとグループ | ユーザとグループは、Active Directory（AD）からロールを割り当てる権限で使用されます。vCenter Serverには、使用可能な独自のローカルユーザとローカルグループがあります。 
+
+
+| 権限 | 権限を使用すると、Privilegesをユーザまたはグループに割り当てて、特定の操作を実行し、vCenter Server内のオブジェクトに変更を加えることができます。vCenter Serverの権限は、ESXiホストに直接ログインするユーザではなく、vCenter Serverにログインするユーザにのみ影響します。 
+
+
+| オブジェクト | アクションが実行されるエンティティ。VMware vCenterオブジェクトは、データセンター、フォルダ、リソースプール、クラスタ、ホスト、 およびVM 
+|===
+タスクを完了するには、適切なvCenter Server RBACロールが必要です。タスクの実行中、ONTAP tools for VMware vSphereは、ユーザのvCenter Serverロールを確認してから、ユーザのONTAP権限を確認します。
+
+
+NOTE: vCenter Serverのロールは、管理者ではなく、ONTAP Tools for VMware vSphere vCenterユーザに適用されます。デフォルトでは、管理者は製品へのフルアクセス権を持ち、ロールを割り当てる必要はありません。
+
+ユーザとグループは、vCenter Serverロールに含まれることでロールにアクセスできます。
+
+
+
+== vCenter Serverのロールの割り当てと変更に関するキーポイント
+
+vCenter Serverのロールは、vSphereのオブジェクトおよびタスクへのアクセスを制限する場合にのみ設定します。それ以外の場合は、管理者としてログインできます。このログインにより、すべてのvSphereオブジェクトに自動的にアクセスできるようになります。
+
+ロールを割り当てる場所によって、ユーザが実行できるONTAP Tools for VMware vSphereタスクが決まります。一度に1つのロールを変更できます。ロール内の権限を変更した場合、そのロールに関連付けられているユーザは、更新されたロールを有効にするためにログアウトしてから再度ログインする必要があります。
+
+
+
+== ONTAP Tools for VMware vSphereに付属の標準ロール
+
+vCenter Serverの権限とRBACを簡単に使用できるように、ONTAP Tools for VMware vSphereには、主要なONTAPツールfor VMware vSphereタスクを実行できる標準のONTAPツールfor VMware vSphereロールが用意されています。タスクを実行せずに情報を表示できる読み取り専用ロールもあります。
+
+ONTAP Tools for VMware vSphereの標準ロールを表示するには、vSphere Clientのホームページで*[ロール]*をクリックします。ONTAP Tools for VMware vSphereのロールで、次のタスクを実行できます。
+
+|===
+
+
+| * 役割 * | * 概要 * 
+
+
+| VMware vSphere管理者向けNetApp ONTAPツール | ONTAP tools for VMware vSphereの一部のタスクを実行するために必要なvCenter Server標準の権限とONTAP tools固有の権限がすべて含まれています。 
+
+
+| NetApp ONTAP Tools for VMware vSphere読み取り専用 | ONTAP toolsへの読み取り専用アクセスを許可します。アクセスが制御されたONTAP tools for VMware vSphereアクションを実行することはできません。 
+
+
+| NetApp ONTAP Tools for VMware vSphereのプロビジョニング  a| 
+ストレージのプロビジョニングに必要なvCenter Server標準の権限とONTAP tools固有の権限が含まれています。次のタスクを実行できます。
+
+* 新しいデータストアを作成する
+* データストアの管理
+
+
+|===
+ONTAP tools Managerの管理者ロールがvCenter Serverに登録されていません。このロールは、ONTAP tools Managerに固有です。
+
+標準のONTAP tools for VMware vSphereロールよりも制限の厳しいロールを実装する必要がある場合は、ONTAP tools for VMware vSphereロールを使用して新しいロールを作成できます。
+
+この場合は、必要なONTAP tools for VMware vSphereロールのクローンを作成し、そのクローンを編集してユーザに必要な権限だけを付与します。
+
+
+
+== ONTAPストレージバックエンドとvSphereオブジェクトの権限
+
+vCenter Serverアクセス許可が十分であれば、ONTAP tools for VMware vSphereは、ストレージバックエンドのクレデンシャル（ユーザ名とパスワード）に関連付けられているONTAP RBAC権限（ONTAPロール）を確認します。 そのストレージバックエンドでONTAP tools for VMware vSphereタスクに必要なストレージ処理を実行するための十分な権限があるかどうかを確認する。正しいONTAP Privilegesがあれば、ストレージバックエンドにアクセスしてONTAP Tools for VMware vSphereタスクを実行できます。ストレージバックエンドで実行できるONTAP Tools for VMware vSphereタスクは、ONTAPロールで決まります。

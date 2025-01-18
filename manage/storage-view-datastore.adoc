@@ -1,0 +1,59 @@
+---
+permalink: manage/storage-view-datastore.html 
+sidebar: sidebar 
+keywords: Remove vVol datastore 
+summary: 'ONTAP tools for VMware vSphereの[Configure]タブにあるONTAPストレージビューには、データストアとそのボリュームに関連するデータが表示されます。' 
+---
+= データストアのONTAPストレージビュー
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP tools for VMware vSphereの[Configure]タブにあるONTAPストレージビューには、データストアとそのボリュームに関連するデータが表示されます。このビューには、データストアのストレージ側が表示されます。
+
+
+
+== NFSデータストア用のONTAPストレージビュー
+
+.手順
+. vSphere Clientで、NFSデータストアに移動します。
+. 右ペインの*[設定]*タブをクリックします。
+. NetApp ONTAP tools *>* ONTAP Storage *を選択します。右側のペインに*[ストレージの詳細]*および* NFSの詳細*が表示されます。
++
+** ストレージの詳細ページには、ストレージバックエンド、アグリゲート、およびボリュームに関する情報が表示されます。
+** [NFSの詳細]ページには、NFSデータストアに関連するデータが表示されます。
+
+
+
+
+
+
+== VMFSデータストア用のONTAPストレージビュー
+
+.手順
+. vSphere Clientで、VMFSデータストアに移動します。
+. 右ペインの*[設定]*タブをクリックします。
+. NetApp ONTAP tools *>* ONTAP Storage *を選択します。右側のペインに、*[ストレージの詳細]*および* LUNの詳細*または*[ネームスペースの詳細]*（NVMe/TCPプロトコルまたはNVMe/FCプロトコルの場合）が表示されます。
++
+** ストレージの詳細ページには、ストレージバックエンド、アグリゲート、およびボリュームに関する情報が表示されます。
+** [LUNの詳細]ページには、LUNに関連するデータが表示されます。
+** VMFSデータストアにNVMe/TCPまたはNVMe/FCプロトコルを使用している場合は、[ネームスペースの詳細]ページにネームスペースに関連するデータが表示されます。
+
+
+
+
+
+
+== vVolデータストアのONTAPストレージビュー
+
+.手順
+. vSphere Clientで、vVolデータストアに移動します。
+. 右ペインの*[設定]*タブをクリックします。
+. NetApp ONTAP tools *>* ONTAP Storage *を選択します。
+. ONTAPストレージビューには、すべてのボリュームが表示されます。ONTAPストレージペインでは、ストレージを拡張または削除できます。
++
+link:../manage/expand-storage-of-vvol-datastore.html["vVol データストアの拡張"]セクションの手順に従ってvVolデータストアを追加し、link:../manage/remove-storage-from-a-vvols-datastore.html["vVolデータストアの縮小"]セクションの手順に従ってデータストアを削除します。
+
+

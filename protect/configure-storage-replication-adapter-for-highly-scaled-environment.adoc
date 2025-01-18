@@ -1,0 +1,72 @@
+---
+permalink: protect/configure-storage-replication-adapter-for-highly-scaled-environment.html 
+sidebar: sidebar 
+keywords:  
+summary: 大規模な環境で最適なパフォーマンスを実現するには、Storage Replication Adapter（SRA\）の推奨設定に従ってストレージのタイムアウト間隔を設定する必要があります。 
+---
+= 大規模な環境向けのSRAの設定
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+大規模な環境で最適なパフォーマンスを実現するには、Storage Replication Adapter（SRA）の推奨設定に従ってストレージのタイムアウト間隔を設定する必要があります。
+
+
+
+== ストレージプロバイダの設定
+
+大規模な環境では、VMware Live Site Recoveryで次のタイムアウト値を設定する必要があります。
+
+|===
+
+
+| * 詳細設定 * | * タイムアウト値 * 
+
+
+ a| 
+`StorageProvider.resignatureTimeout`
+ a| 
+設定値を900秒から12000秒に増やします。
+
+
+
+ a| 
+`storageProvider.hostRescanDelaySec`
+ a| 
+60
+
+
+
+ a| 
+`storageProvider.hostRescanRepeatCnt`
+ a| 
+20
+
+
+
+ a| 
+`storageProvider.hostRescanTimeoutSec`
+ a| 
+高い値を設定します（例：99999）。
+
+|===
+また、 `StorageProvider.autoResignatureMode`オプションを有効にする必要があります。
+
+ストレージプロバイダの設定の変更の詳細については、VMwareのドキュメントを参照してください。
+
+https://docs.vmware.com/en/VMware-Live-Site-Recovery/9.0/vmware-live-site-recovery/GUID-E4060824-E3C2-4869-BC39-76E88E2FF9A0.html["VMware vSphere のドキュメント：「ストレージプロバイダ設定の変更"]
+
+
+
+== ストレージ設定
+
+タイムアウトになった場合は `storage.commandTimeout`、との値を大きくして `storage.maxConcurrentCommandCnt`大きい値にします。
+
+
+NOTE: 指定するタイムアウト間隔は最大値です。最大タイムアウトに達することはありません。ほとんどのコマンドは、設定された最大タイムアウト間隔内で終了します。
+
+詳細については、SANプロバイダの設定の変更に関するVMwareのドキュメントを参照してください。
+
+https://docs.vmware.com/en/VMware-Live-Site-Recovery/9.0/vmware-live-site-recovery/GUID-711FD223-50DB-414C-A2A7-3BEB8FAFDBD9.html["VMware Site Recovery Manager のドキュメント：「ストレージ設定の変更"]

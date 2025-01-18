@@ -1,0 +1,39 @@
+---
+permalink: manage/certificate-manage.html 
+sidebar: sidebar 
+keywords:  
+summary: ONTAP tools for VMware vSphereの単一インスタンスで、複数のvCenter Serverインスタンスを管理できます。ONTAP Tools for VMware vSphereは、VASA Provider用の自己署名証明書を使用して導入されます。これにより、vVolデータストアに対して管理できるvCenter Serverインスタンスは1つだけです。 
+---
+= 証明書の管理
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP tools for VMware vSphereの単一インスタンスで、複数のvCenter Serverインスタンスを管理できます。ONTAP Tools for VMware vSphereは、VASA Provider用の自己署名証明書を使用して導入されます。これにより、vVolデータストアに対して管理できるvCenter Serverインスタンスは1つだけです。複数のvCenter Serverインスタンスを管理していて、複数のvCenter ServerインスタンスでVVol機能を有効にする場合は、ONTAP tools Managerインターフェイスを使用して自己署名証明書をカスタムCA証明書に変更する必要があります。同じインターフェイスを使用して、すべての証明書を更新または更新できます。
+
+
+NOTE: カスタムCAに自己署名をアップグレードする場合、異なるドメインにマッピングされた別のロードバランサIPアドレスはサポートされません。
+
+* 手順 *
+
+. WebブラウザからONTAP Tools Managerを起動します。 `\https://loadBalanceIP:8443/virtualization/ui/`
+. 導入時に指定したONTAP tools for VMware vSphere管理者のクレデンシャルを使用してログインします。
+. 証明書を更新するには、*[証明書]*>*[VASA provider]*>*[更新]*オプションを選択します。
++
+
+NOTE: 証明書が更新されるまで、システムはオフラインになります。
+
+. 自己署名証明書をカスタムCA証明書にアップグレードするには、*[証明書]*>*[VASA Provider ]*>*[CAにアップグレード]*オプションを選択します。
++
+.. [証明書をカスタムCA *にアップグレード]ポップアップで、サーバ証明書、サーバ証明書の秘密鍵、ルートCA証明書、および中間証明書のファイルをアップロードします。ツールヒントには証明書の概要が表示されます。
+.. この証明書を生成したドメイン名を入力します。
+.. [* アップグレード ] をクリックします。
++
+
+NOTE: アップグレードが完了するまで、システムはオフラインになります。
+
+
+
+

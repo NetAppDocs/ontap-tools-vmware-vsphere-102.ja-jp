@@ -1,0 +1,10 @@
+---
+section: deploy
+title: ONTAP Tools for VMware vSphereの導入
+entries:
+- title: 前提条件
+  url: "/deploy/prerequisites.html"
+- title: ONTAPツールの導入
+  url: "/deploy/ontap-tools-deployment.html"
+- title: 導入エラーコード
+  url: "/deploy/deployment-error-codes.html"

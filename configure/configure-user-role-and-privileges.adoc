@@ -1,0 +1,228 @@
+---
+permalink: configure/configure-user-role-and-privileges.html 
+sidebar: sidebar 
+keywords: user roles 
+summary: ONTAP tools for VMware vSphereおよびONTAP System Managerに付属のJSONファイルを使用して、ストレージバックエンドを管理するための新しいユーザロールを設定できます。 
+---
+= ONTAPユーザのロールと権限の設定
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ストレージバックエンドの管理に使用する新しいユーザロールと権限を設定するには、ONTAP tools for VMware vSphereおよびONTAP System Managerに付属のJSONファイルを使用します。
+
+* 必要なもの *
+
+* ONTAP PrivilegesファイルをONTAP tools for VMware vSphereから、_\ https：//<loadbalancerIP>：8443 /virtualization/user-privileges/users_roles.zip_を使用してダウンロードしておく必要があります。
+* を使用して、ONTAP toolsからONTAP Privilegesファイルをダウンロードしておく必要があります `\https://<loadbalancerIP>:8443/virtualization/user-privileges/users_roles.zip`。
++
+
+NOTE: ユーザは、クラスタレベルまたはStorage Virtual Machine（SVM）レベルで直接作成できます。user_roles.jsonファイルを使用せずにユーザを作成することもできます。作成した場合は、SVMレベルの最小限の権限セットが必要になります。
+
+* ストレージバックエンドの管理者権限でログインしている必要があります。
+
+
+* 手順 *
+
+. ダウンロードした_\ https：//<loadbalancerIP>：8443 /virtualization/user-privileges/users_roles.zip_fileを展開します。
+. クラスタのクラスタ管理IPアドレスを使用してONTAP System Managerにアクセスします。
+. 管理Privilegesでクラスタにログインします。ユーザを設定するには、次の手順を実行します。
++
+.. クラスタのONTAP toolsユーザを設定するには、*[クラスタ]*>*[設定]*>*[ユーザとロール]*ペインを選択します。
+.. SVM ONTAP toolsのユーザを設定するには、*[ストレージSVM ]*>*[設定]*>*[ユーザとロール]*ペインを選択します。
+.. [Users]で[Add]*を選択します。
+.. [ユーザーの追加*]ダイアログボックスで、[仮想化製品*]を選択します。
+.. *参照*をクリックして、ONTAP Privileges JSONファイルを選択してアップロードします。
++
+[Product]フィールドには自動的に値が入力されます。
+
+.. 製品機能ドロップダウンメニューから必要な機能を選択します。
++
+[ロール]*フィールドには、選択した製品機能に基づいて自動的に値が入力されます。
+
+.. 必要なユーザ名とパスワードを入力します。
+.. ユーザに必要な権限（[Discovery]、[Create Storage]、[Modify Storage]、[Destroy Storage]、[NAS/SAN Role]）を選択し、*[Add]*をクリックします。
+
+
+
+
+新しいロールとユーザが追加され、設定したロールの詳細な権限が表示されます。
+
+
+NOTE: アンインストール処理では、ONTAPツールのロールは削除されませんが、ONTAPツール固有のPrivilegesのローカライズされた名前は削除され、プレフィックスが付加され `XXX missing privilege`ます。ONTAP tools for VMware vSphereを再インストールするか新しいバージョンにアップグレードすると、標準のONTAP tools for VMware vSphereロールとONTAP tools固有の権限がすべてリストアされます。
+
+
+
+== SVMアグリゲートのマッピングの要件
+
+データストアのプロビジョニングにSVMのユーザクレデンシャルを使用するために、内部的にONTAP tools for VMware vSphereは、データストアのPOST APIで指定されたアグリゲートにボリュームを作成します。ONTAPでは、SVMユーザクレデンシャルを使用して、マッピングされていないアグリゲートにボリュームを作成することはできません。この問題を解決するには、ここで説明するONTAP REST APIまたはCLIを使用してSVMとアグリゲートをマッピングする必要があります。
+
+REST API：
+
+[listing]
+----
+PATCH "/api/svm/svms/f16f0935-5281-11e8-b94d-005056b46485" '{"aggregates":{"name":["aggr1","aggr2","aggr3"]}}'
+----
+ONTAP CLI：
+
+[listing]
+----
+sti115_vsim_ucs630f_aggr1 vserver show-aggregates                                        AvailableVserver        Aggregate      State         Size Type    SnapLock Type-------------- -------------- ------- ---------- ------- --------------svm_test       sti115_vsim_ucs630f_aggr1                               online     10.11GB vmdisk  non-snaplock
+----
+
+
+== ONTAPのユーザとロールを手動で作成する
+
+このセクションの手順に従って、JSONファイルを使用せずにユーザとロールを手動で作成します。
+
+. クラスタのクラスタ管理IPアドレスを使用してONTAP System Managerにアクセスします。
+. 管理Privilegesでクラスタにログインします。
++
+.. クラスタのONTAP toolsのロールを設定するには、*[クラスタ]*>*[設定]*>*[ユーザとロール]*ペインを選択します。
+.. クラスタSVM ONTAP toolsのロールを設定するには、*[ストレージSVM ]*>*[設定]*>*[ユーザとロール]*ペインを選択します。
+
+
+. ロールの作成：
++
+.. [ロール]*テーブルの*[追加]*を選択します。
+.. [ロール名]*および[ロール属性]*の詳細を入力します。
++
+[REST API Path]*と該当するアクセスをドロップダウンから追加します。
+
+.. 必要なAPIをすべて追加し、変更を保存します。
+
+
+. ユーザの作成：
++
+.. Users *テーブルの* Add *を選択します。
+.. [ユーザの追加]ダイアログボックスで、*[System Manager]*を選択します。
+.. [Username]*を入力します。
+.. 上記の*ロールの作成*ステップで作成したオプションから*ロール*を選択します。
+.. アクセスを許可するアプリケーションと認証方法を入力します。ONTAPIとHTTPが必要なアプリケーションで、認証タイプは* Password *です。
+.. ユーザーの*パスワード*とユーザーの*保存*を設定します。
+
+
+
+
+
+
+== 管理者以外のグローバルを対象としたクラスタユーザに必要な最小権限のリスト
+
+このセクションには、users JSONファイルを使用せずに作成した管理者以外のグローバル対象のクラスタユーザに必要な最小権限を記載します。クラスタをローカルスコープで追加する場合は、JSONファイルを使用してユーザを作成することを推奨します。ONTAP tools for VMware vSphereでは、ONTAPでのプロビジョニングに読み取り権限だけでは不十分なためです。
+
+APIの使用：
+
+|===
+
+
+| API | アクセスレベル | 使用目的 
+
+
+| /api/クラスタ | 読み取り専用 | クラスタ構成の検出 
+
+
+| /api/cluster/licensing/licenses | 読み取り専用 | プロトコル固有のライセンスのライセンスチェック 
+
+
+| /API /クラスタ/ノード | 読み取り専用 | プラットフォームタイプの検出 
+
+
+| / API /ストレージ/アグリゲート | 読み取り専用 | データストア/ボリュームプロビジョニング時のアグリゲートスペースの確認 
+
+
+| / API /ストレージ/クラスタ | 読み取り専用 | クラスタレベルのスペースと削減率のデータを取得するには 
+
+
+| /API/ストレージ/ディスク | 読み取り専用 | アグリゲートに関連付けられているディスクを取得するには 
+
+
+| /api/storage/qos/policies | 読み取り/作成/変更 | QoSとVMポリシーの管理 
+
+
+| /api/SVM/SVMs | 読み取り専用 | クラスタがローカルに追加された場合にSVMの設定を取得するには、次の手順を実行します。 
+
+
+| /api/network/ip/interfaces | 読み取り専用 | ストレージバックエンドの追加-管理LIFの範囲がクラスタ/ SVMであることを確認します。 
+
+
+| / API | 読み取り専用 | 正しいストレージバックエンドステータスを取得するには、クラスタユーザにこの権限が必要です。それ以外の場合は、ONTAP tools Managerに「unknown」ストレージバックエンドステータスが表示されます。 
+|===
+
+
+== ONTAP tools for VMware vSphere 10.1ユーザから10.2ユーザへのアップグレード
+
+ONTAP tools for VMware vSphere 10.1ユーザが、JSONファイルを使用して作成されたクラスタスコープのユーザである場合は、ONTAP CLIでadminユーザを使用して次のコマンドを実行し、10.2リリースにアップグレードします。
+
+製品機能の場合：
+
+* VSC
+* VSCとVASA Provider
+* VSCとSRA
+* VSC、VASA Provider、SRA：
+
+
+クラスタPrivileges：
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme namespace show"-access all_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem show"-access all_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem host show"-access all_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem map show"-access all_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme show -interface"-access read_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem host add"-access all_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem map add"-access all_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme namespace delete"-access all_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem delete"-access all_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem host remove"-access all_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem map remove"-access all_
+
+ONTAP tools for VMware vSphere 10.1ユーザが、JSONファイルを使用して作成されたSVMスコープのユーザである場合は、ONTAP CLIでadminユーザを使用して次のコマンドを実行し、10.2リリースにアップグレードします。
+
+SVM Privileges：
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme namespace show"-access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem show"-access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem host show"-access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem map show"-access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme show-interface"-access read -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem host add"-access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem map add"-access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme namespace delete"-access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem delete"-access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem host remove"-access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name>-cmddirname "vserver nvme subsystem map remove"-access all -vserver <vserver-name>_
+
+command_vserver nvme namespace show_and_vserver nvme subsystem show_を既存のロールに追加すると、次のコマンドが追加されます。
+
+[listing]
+----
+vserver nvme namespace create
+
+vserver nvme namespace modify
+
+vserver nvme subsystem create
+
+vserver nvme subsystem modify
+
+----

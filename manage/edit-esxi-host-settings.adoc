@@ -1,0 +1,33 @@
+---
+permalink: manage/edit-esxi-host-settings.html 
+sidebar: sidebar 
+keywords:  
+summary: ダッシュボードof ONTAP tools for VMware vSphereを使用して、ESXiホストの設定を編集できます。 
+---
+= ONTAPツールを使用したESXiホストの設定の変更
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ダッシュボードof ONTAP tools for VMware vSphereを使用して、ESXiホストの設定を編集できます。
+
+* 必要なもの *
+
+ESXiホストの設定が含まれている問題がある場合は、ダッシュボードの[ESXiホストシステム]ポートレットに問題が表示されます。問題をクリックすると、問題があるESXiホストのホスト名またはIPアドレスを確認できます。
+
+* 手順 *
+
+. 次のコマンドを使用してvSphere Clientにログインします。 `\https://vcenterip/ui`
+. ショートカットページで、プラグインセクションの* NetApp ONTAP tools *をクリックします。
+. ONTAP tools for VMware vSphereプラグインの概要（ダッシュボード）で、* ESXiホストコンプライアンス*ポートレットに移動します。
+. [推奨設定の適用]*リンクを選択します。
+. [推奨されるホスト設定を適用]*ウィンドウで、NetAppの推奨されるホスト設定に準拠するホストを選択し、*[次へ]*をクリックします。
++
+
+NOTE: ESXiホストを展開すると、現在の値を確認できます。
+
+. 設定ページで、必要に応じて推奨値を選択します。
+. 概要ペインで値を確認し、*[完了]*をクリックします。進捗状況は、[最近使用したタスク]パネルで追跡できます。
+

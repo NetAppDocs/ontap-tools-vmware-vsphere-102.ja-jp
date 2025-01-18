@@ -1,0 +1,138 @@
+---
+permalink: configure/create-vvols-datastore.html 
+sidebar: sidebar 
+keywords:  
+summary: vVolデータストアは、新しいボリュームまたは既存のボリュームを使用して作成できます。既存のボリュームと新しいボリュームを組み合わせてvVolデータストアを作成することもできます。 
+---
+= データストアを作成
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ホストクラスタレベルでデータストアを作成すると、データストアが作成されてデスティネーションのすべてのホストにマウントされます。この操作は、現在のユーザに実行権限がある場合にのみ有効になります。
+
+[Create Datastore]アクションウィザードでは、NFS、VMFS、およびvVolデータストアを作成できます。
+
+* 保護対象のクラスタにはVMFSデータストアのみを作成できます。VMFSデータストアを保護対象のクラスタに追加すると、データストアは自動的に保護されます。
+* 保護されているホストクラスタが1つ以上あるデータセンターにデータストアを作成することはできません。
+* 親ホストクラスタがAutomated Failover Duplexポリシータイプ（uniform / non-uniform config）の関係で保護されている場合は、ホストにデータストアを作成できません。
+* ホストにVMFSデータストアを作成できるのは、ホストに非同期関係が設定されている場合のみです。
+
+
+[role="tabbed-block"]
+====
+.vVolデータストアを作成する
+--
+vVolデータストアは、新しいボリュームまたは既存のボリュームを使用して作成できます。既存のボリュームと新しいボリュームが混在しているvVolデータストアを作成することはできません。
+
+
+NOTE: ルートアグリゲートがSVMにマッピングされていないことを確認します。
+
+.開始する前に
+選択したvCenterにVASA Providerが登録されていることを確認してください。
+
+.手順
+. 次のコマンドを使用してvSphere Clientにログインします。 `\https://vcenterip/ui`
+. ホストシステム、ホストクラスタ、データセンターを右クリックし、* NetApp ONTAP tools *>*[Create Datastore]*を選択します。
+. [タイプ]*ペインで、*[データストアタイプ]*で[VVols]を選択します。
+. [名前とプロトコル]ペインで、*[データストア名]*と*[プロトコル]*の情報を指定します。
+. [ストレージ]*ペインで、*[プラットフォーム]*および*[Storage VM]*を選択します。[アドバンストオプション]*セクションで、必要に応じてカスタムのエクスポートポリシー（NFSプロトコルの場合）またはカスタムのイニシエータグループ名（iSCSI AMD FCプロトコルの場合）を選択します。
++
+** [プラットフォーム]オプションと[非対称]オプションを使用すると、[SVM]ドロップダウンオプションをフィルタして除外できます。作成するSVMを選択するか、ボリュームをデータストアの作成に使用してください。
+** [非対称]*トグルボタンは、前の手順で[iSCSI]を選択し、[プラットフォーム]ドロップダウンで[パフォーマンス]または[容量]を選択した場合にのみ表示されます。
+** AFFプラットフォームの場合は[非対称]トグルボタンを選択し、ASAプラットフォームの場合は無効にします。
+
+
+. [ストレージ属性]*ペインで、新しいボリュームを作成するか、既存のボリュームを使用できます。新しいボリュームを作成するときに、データストアでQoSを有効にすることができます。
+. [サマリ]*ペインで選択内容を確認し、*[完了]*をクリックします。vVolデータストアが作成され、すべてのホストにマウントされます。
+
+
+--
+.NFSデータストアを作成する
+--
+VMware Network File System（NFS）データストアは、NFSプロトコルを使用して、ESXiホストをネットワーク経由で共有ストレージデバイスに接続します。NFSデータストアはVMware vSphere環境で一般的に使用され、シンプルさや柔軟性など、いくつかの利点があります。
+
+.手順
+. 次のコマンドを使用してvSphere Clientにログインします。 `\https://vcenterip/ui`
+. ホストシステム、ホストクラスタ、またはデータセンターを右クリックし、* NetApp ONTAP tools *>*[Create Datastore]*を選択します。
+. [タイプ]ペインで、*[データストアタイプ]*で[NFS]を選択します。
+. [名前とプロトコル]*ペインで、データストア名、サイズ、およびプロトコル情報を入力します。アドバンストオプションで、*[データストアクラスタ]*および*[Kerberos認証]*を選択します。
++
+
+NOTE: Kerberos認証は、NFS 4.1プロトコルが選択されている場合にのみ使用できます。
+
+. [ストレージ]*ペインで、*[プラットフォーム]*および*[Storage VM]*を選択します。[アドバンストオプション]*セクションで*[カスタムエクスポートポリシー]*を選択できます。
++
+** *非対称*トグルボタンは、プラットフォームのドロップダウンでパフォーマンスまたは容量が選択されている場合にのみ表示されます。
+** *[プラットフォーム]ドロップダウンの[任意]*オプションを使用すると、プラットフォームフラグまたは非対称フラグに関係なく、vCenterに含まれるすべてのSVMを表示できます。
+
+
+. [ストレージ属性]*ペインで、ボリュームを作成するアグリゲートを選択します。アドバンストオプションで、必要に応じて*[スペースリザベーション]*および*[QoSを有効にする]*を選択します。
+. [概要]*ペインで選択内容を確認し、*[完了]*をクリックします。
+
+
+NFSデータストアが作成され、すべてのホストにマウントされます。
+
+--
+.VMFSデータストアの作成
+--
+Virtual Machine File System（VMFS）は、VMware vSphere環境に仮想マシンファイルを格納するために特別に設計されたクラスタファイルシステムです。複数のESXiホストが同じ仮想マシンファイルに同時にアクセスできるため、vMotionや高可用性などの機能が有効になります。
+
+.開始する前に
+続行する前に、次の項目を確認してください。
+
+* ONTAPストレージ側のプロトコルごとに、それぞれのサービスとLIFを有効にする必要があります。
+* NVMe/TCPプロトコルを使用している場合は、次の手順を実行してESXiホストを設定します。
++
+.. を確認します。 https://www.vmware.com/resources/compatibility/detail.php?deviceCategory=san&productid=49677&releases_filter=589,578,518,508,448&deviceCategory=san&details=1&partner=399&Protocols=1&transportTypes=3&isSVA=0&page=1&display_interval=10&sortColumn=Partner&sortOrder=Asc["VMware Compatibility Guide"]
++
+
+NOTE: VMware vSphere 7.0 U3以降のバージョンでは、NVMe/TCPプロトコルがサポートされます。ただし、VMware vSphere 8.0以降のバージョンを推奨します。
+
+.. ネットワークインターフェイスカード（NIC）ベンダーがNVMe/TCPプロトコルを使用するESXi NICをサポートしているかどうかを確認します。
+.. NICベンダーの仕様に従ってESXi NICをNVMe/TCP用に設定します。
+.. VMware vSphere 7リリースを使用している場合は、VMwareサイトの手順に従って https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.storage.doc/GUID-D047AFDD-BC68-498B-8488-321753C408C2.html#GUID-D047AFDD-BC68-498B-8488-321753C408C2["NVMe over TCPアダプタ用のVMkernelバインドの設定"]NVMe/TCPポートバインドを設定します。VMware vSphere 8リリースを使用している場合は、に従って https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-5F776E6E-62B1-445D-854C-BEA689DD4C92.html#GUID-D047AFDD-BC68-498B-8488-321753C408C2["ESXiでのNVMe over TCPの設定"]NVMe/TCPポートバインドを設定します。
+.. VMware vSphere 7リリースの場合は、VMwareサイトの手順に従って https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.storage.doc/GUID-8BBD672E-0829-4CF2-84B2-26A3A89ABD2E.html["NVMe over RDMAまたはNVMe over TCPソフトウェアアダプタの有効化"]NVMe/TCPソフトウェアアダプタを設定します。VMware vSphere 8リリースの場合は、に従って https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-F4B42510-9E6D-4446-816A-5012866E0038.html#GUID-8BBD672E-0829-4CF2-84B2-26A3A89ABD2E["ソフトウェアNVMe over RDMAまたはNVMe over TCPアダプタの追加"]NVMe/TCPソフトウェアアダプタを設定します。
+.. link:../configure/discover-storage-systems-and-hosts["ストレージシステムとホストの検出"]ESXiホストでアクションを実行します。詳細については、を参照してください。 https://community.netapp.com/t5/Tech-ONTAP-Blogs/How-to-Configure-NVMe-TCP-with-vSphere-8-0-Update-1-and-ONTAP-9-13-1-for-VMFS/ba-p/445429["VMFSデータストア用にNVMe/TCPをvSphere 8.0 Update 1およびONTAP 9 VMFS.13.1で設定する方法"]
+
+
+* NVMe/FCプロトコルを使用する場合は、次の手順を実行してESXiホストを設定します。
++
+.. ESXiホストでNVMe over Fabrics（NVMe-oF）を有効にします。
+.. SCSIゾーニングを完了します。
+.. ESXiホストとONTAPシステムが物理レイヤと論理レイヤで接続されていることを確認します。
+
+
+
+
+ONTAP SVMをFCプロトコル用に設定する方法については、を参照してください https://docs.netapp.com/us-en/ontap/san-admin/configure-svm-fc-task.html["FC用のSVMの設定"]。
+
+VMware vSphere 8.0でNVMe/FCプロトコルを使用する方法の詳細については、を参照してください https://docs.netapp.com/us-en/ontap-sanhost/nvme_esxi_8.html["ONTAP を搭載したESXi 8.x向けのNVMe-oFホスト構成"]。
+
+VMware vSphere 7.0でNVMe/FCを使用する方法の詳細については https://docs.netapp.com/us-en/ontap-sanhost/nvme_esxi_8.html["ONTAP NVMe/FC Host Configuration Guide"]、およびを参照して http://www.netapp.com/us/media/tr-4684.pdf["TR-4684"]ください。
+
+.手順
+. 次のコマンドを使用してvSphere Clientにログインします。 `\https://vcenterip/ui`
+. ホストシステム、ホストクラスタ、またはデータストアを右クリックし、* NetApp ONTAP tools *>*[Create Datastore]*を選択します。
+. [タイプ]ペインで、*[データストアタイプ]*で[VMFS]を選択します。
+. [名前とプロトコル]*ペインで、データストア名、サイズ、およびプロトコルの情報を入力します。ペインの*[アドバンストオプション]*セクションで、このデータストアを追加するデータストアクラスタを選択します。
+. [ストレージ]*ペインで[プラットフォームとStorage VM]を選択します。[非対称]トグルボタンを選択します。ペインの*[アドバンストオプション]*セクションで*[カスタムイニシエータグループ名]*を指定します（オプション）。データストア用に既存のigroupを選択するか、カスタム名を指定して新しいigroupを作成できます。
++
+プラットフォームのドロップダウンで*[いずれか]*オプションを選択すると、プラットフォームフラグまたは非対称フラグに関係なく、vCenterに含まれるすべてのSVMが表示されます。プロトコルを[NVMe/FC]または[NVMe/TCP]に選択すると、新しいネームスペースサブシステムが作成され、ネームスペースのマッピングに使用されます。デフォルトでは、自動で生成されたデータストア名を含む名前を使用してネームスペースサブシステムが作成されます。[ストレージ]*ペインの詳細オプションにある*[カスタムネームスペースサブシステム名]*フィールドで、ネームスペースサブシステムの名前を変更できます。
+
+. [ストレージ属性]ペインで、ドロップダウンメニューから*[アグリゲート]*を選択します。必要に応じて*[アドバンストオプション]*セクションで*[スペースリザベーション]*、*[既存のボリュームを使用]*、*[QoSを有効にする]*オプションを選択し、必要に応じて詳細を指定します。
++
+
+NOTE: NVMe/FCまたはNVMe/TCPプロトコルを使用してVMFSデータストアを作成する場合は、新しいボリュームを作成する必要があります。
+
+. [概要]*ペインでデータストアの詳細を確認し、*[終了]*をクリックします。
++
+
+NOTE: データストアを保護されたクラスタに作成している場合は、読み取り専用のメッセージ「The datastore is being mounted on a protected Cluster」が表示されます。VMFSデータストアが作成され、すべてのホストにマウントされます。
+
+
+
+--
+====

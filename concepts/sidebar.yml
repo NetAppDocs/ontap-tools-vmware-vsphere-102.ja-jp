@@ -1,0 +1,26 @@
+---
+section: concepts
+title: 概念
+entries:
+- title: ONTAP Tools for VMware vSphereの概要
+  url: "/concepts/ontap-tools-overview.html"
+- title: 主要な概念と用語
+  url: "/concepts/ontap-tools-concepts-terms.html"
+- title: ロールベースアクセス制御
+  entries:
+  - title: 概要
+    url: "/concepts/vcenter-server-role-based-access-control-features.html"
+  - title: vCenter Serverアクセス許可
+    url: "/concepts/vcenter-server-permissions.html"
+  - title: vCenter Serverの権限の割り当てと変更
+    url: "/concepts/key-points-about-assign-and-modify-permissions.html"
+  - title: ONTAP Tools for VMware vSphereのタスクに必要な権限
+    url: "/concepts/privileges-required.html"
+  - title: 推奨されるONTAPロール
+    url: "/concepts/ontap-roles.html"
+- title: ONTAP tools for VMware vSphereの高可用性
+  url: "/concepts/high-availability.html"
+- title: AutoSupport
+  url: "/concepts/autosupport.html"
+- title: ONTAP tools Managerユーザインターフェイス
+  url: "/configure/manager-user-interface.html"

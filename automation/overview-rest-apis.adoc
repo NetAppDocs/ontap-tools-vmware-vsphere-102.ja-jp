@@ -1,0 +1,88 @@
+---
+permalink: automation/overview-rest-apis.html 
+sidebar: sidebar 
+keywords: REST APIs, swagger 
+summary: REST APIを使用してONTAP Tools for VMware vSphereの管理処理をいくつか実行する方法について説明します。REST APIはSwagger Webページから利用できます。 
+---
+= REST APIの概要
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+REST APIを使用して、VMware vSphereの管理処理用のONTAPツールをいくつか実行できます。REST APIはSwagger Webページから利用できます。
+
+APIドキュメントを表示したり、呼び出しを手動で問題したりするには、_\https://loadbalancerIP:8443/_にあるSwagger Webページにアクセスします。
+
+
+NOTE: すべてのAPIには、要求の本文と、swaggerページに記載されている例があります。このセクションに記載されているワークフローと例は、参照のみを目的としています。
+
+
+
+== ONTAP tools for VMware vSphere REST APIにアクセスする方法
+
+ONTAP REST API には、いくつかの方法でアクセスできます。
+
+
+
+== ネットワークに関する考慮事項
+
+REST API には、次のインターフェイスを通じて接続できます。
+
+* クラスタ管理LIF
+* ノード管理LIF
+* SVM 管理 LIF
+
+
+使用するLIFは、HTTPS管理プロトコルをサポートするように設定する必要があります。また、ネットワークのファイアウォール設定でHTTPSトラフィックを許可する必要があります。
+
+
+NOTE: 必ずクラスタ管理LIFを使用してください。これにより、API要求の負荷がすべてのノードに分散され、オフラインになっているノードや接続の問題が発生しているノードを回避できます。複数のクラスタ管理LIFが設定されている場合は、REST APIへのアクセスに関してすべて同じです。
+
+
+
+== ONTAP Tools for VMware vSphere APIオンラインドキュメントページ
+
+Swaggerには、NetApp ONTAP tools for VMware vSphereプラグインのサポートページにあるハイパーリンクからアクセスできます。
+
+最新バージョンの API のドキュメントページにアクセスするための URL の形式は次のとおりです。
+
+'https://<loadbalancer_ip_address>/docs/api'
+
+
+
+== カスタムのソフトウェアとツール
+
+ONTAP Tools for VMware vSphere APIには、さまざまなプログラミング言語やツールを使用してアクセスできます。代表的なものとしては、 Python 、 Java 、 Curl 、 PowerShell などがあります。API を使用するプログラム、スクリプト、またはツールは、 REST Web サービスのクライアントとして機能します。プログラミング言語を使用すると、APIについての理解が深まり、ONTAP Tools for VMware vSphereの管理を自動化することができます。
+
+最新バージョンの API に直接アクセスするためのベース URL の形式は次のとおりです。
+
+'https：//<loadbalancer_ip_address>/api'
+
+複数のバージョンがサポートされている場合に特定のバージョンの API にアクセスするには、次の形式の URL を使用します。
+
+'https：//<loadbalancer_ip_address>/api/v1'
+
+
+
+== Swagger UIからONTAP Tools for VMware vSphere APIのリファレンスドキュメントにアクセス
+
+ONTAP REST APIのドキュメントには、ローカルのONTAPシステムのSwagger UIからアクセスできます。
+
+* 始める前に *
+
+次の情報が必要です。
+
+* ONTAP クラスタ管理 LIF の IP アドレスまたはホスト名
+* ONTAP REST APIにアクセスする権限を持つアカウントのユーザ名とパスワード
+
+
+.手順
+. ブラウザにURLを入力し、* Enter *：_\https：//<ip_address>/docs/api_を押します。
+. ONTAPアカウントを使用してサインイン
++
+ONTAP API ドキュメントページが表示され、主要なリソースカテゴリ別に分類された API 呼び出しが下部に表示されます。
+
+. 個々の API 呼び出しの例として、 * cluster * カテゴリまでスクロールし、 * get/cluster * をクリックします。
+

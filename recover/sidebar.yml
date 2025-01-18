@@ -1,0 +1,6 @@
+---
+section: recover
+title: ONTAPツールのリカバリ
+entries:
+- title: ONTAP toolsセットアップのリカバリ
+  url: "/recover/recovery-deployment.html"

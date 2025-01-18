@@ -1,0 +1,25 @@
+---
+permalink: configure/manager-user-interface.html 
+sidebar: sidebar 
+keywords: ontap tools manager, managerui 
+summary: ONTAP tools Managerを使用すると、VMware vSphere管理者向けのONTAP toolsをより詳細に制御して使用できるため、アプライアンス、テナント、ストレージバックエンドの全体的な管理に役立ちます。 
+---
+= ONTAP tools Managerユーザインターフェイス
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP Tools for VMware vSphereは、複数のvCenter Serverインスタンスを管理できるマルチテナントシステムです。ONTAP tools Managerを使用すると、管理対象のvCenter Serverインスタンスとオンボードストレージバックエンドを使用して、VMware vSphere管理者向けのONTAP toolsをより細かく制御できます。
+
+ONTAP Tools Managerは、次のことを支援します。
+
+* vCenter Serverインスタンス管理- vCenter ServerインスタンスをONTAPツールに追加および管理します。
+* ストレージバックエンド管理- ONTAPストレージクラスタをONTAP tools for VMware vSphereに追加および管理し、オンボードされたvCenter Serverインスタンスにグローバルにマッピングします。
+* ログバンドルのダウンロード- ONTAP Tools for VMware vSphereのログファイルを収集します。
+* 証明書管理-自己署名証明書をカスタムCA証明書に変更し、VASA Providerのすべての証明書を更新または更新します。
+* パスワード管理- OVAアプリケーションのユーザパスワードをリセットします。
+
+
+ONTAP tools Managerにアクセスするには `\https://loadBalanceIP:8443/virtualization/ui/`、ブラウザからを起動し、導入時に指定したONTAP tools for VMware vSphere管理者のクレデンシャルを使用してログインします。
