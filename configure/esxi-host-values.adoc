@@ -19,24 +19,12 @@ ESXiホストで設定できる値は次のとおりです。
 
 == HBA / CNAアダプタ設定
 
-NetAppストレージシステムに推奨されるHBAタイムアウト設定を設定します。
+次のパラメータをデフォルト値に設定します。
 
-* * Disk.QFullSampleSize *
-+
-すべての構成でこの値を32に設定します。この値を設定すると、I/Oエラーを回避できます。
-
-* * Disk.QFullThreshold *
-+
-すべての構成でこの値を8に設定します。この値を設定すると、I/Oエラーを回避できます。
-
-* * Emulex FC HBA タイムアウト *
-+
-デフォルト値を使用します。
-
-* * QLogic FC HBA タイムアウト *
-+
-デフォルト値を使用します。
-
+* Disk.QFullSampleSize
+* Disk.QFullThreshold
+* Emulex FC HBAタイムアウト
+* QLogic FC HBAタイムアウト
 
 
 
