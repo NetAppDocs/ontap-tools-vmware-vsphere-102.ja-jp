@@ -11,7 +11,7 @@ summary: vCenter Serverインスタンスは、ホスト、仮想マシン（VM�
 
 
 [role="lead"]
-vCenter Serverは、ホスト、仮想マシン（VM）、およびストレージバックエンドを制御できる一元管理プラットフォームを提供します。
+vCenter ServerインスタンスをONTAP tools for VMware vSphereに追加して、vCenter Server環境内の仮想データストアを設定、管理、保護します。複数の vCenter Server インスタンスを追加する場合、ONTAP ツールと各 vCenter Server 間の安全な通信にはカスタム CA 証明書が必要です。
 
 * このタスクについて *
 

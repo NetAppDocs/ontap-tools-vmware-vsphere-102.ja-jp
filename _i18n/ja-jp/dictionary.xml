@@ -342,7 +342,6 @@
   <block id="7f2d9eb042fad8493c138993f867cd80" category="paragraph">リストが更新され、新しく追加されたストレージバックエンドがリストに表示されます。</block>
   <block id="f6c30a782639c90ebe44f3f343922077" category="summary">vCenter Serverインスタンスは、ホスト、仮想マシン（VM）、ストレージバックエンドを制御できる一元管理プラットフォームです。</block>
   <block id="6245e46af5a3bdaf57696763c4214c70" category="doc">vCenter Serverインスタンスの追加</block>
-  <block id="9a22df67797f0968951385551d26d202" category="paragraph">vCenter Serverは、ホスト、仮想マシン（VM）、およびストレージバックエンドを制御できる一元管理プラットフォームを提供します。</block>
   <block id="aaf638e0edd71bac35fef1b1149f3843" category="paragraph">ONTAP tools for VMware vSphereの1つのインスタンスを使用して、複数のvCenter Serverインスタンスを追加および管理できます。</block>
   <block id="0336e0a2e9f5b95c0d4178d3186ecbf6" category="list-text">サイドバーから* vCenters *を選択します。</block>
   <block id="4287076fd3b7cc772889cb75d012c773" category="list-text">vCenter Serverインスタンスをオンボードするには*[追加]*を選択し、vCenterのIPアドレス/ホスト名、ユーザ名、パスワード、およびポートの詳細を指定します。</block>
@@ -676,7 +675,6 @@
   <block id="02ecc951ba9c7de4ba8def4213f1982e" category="list-text">保護されているホストクラスタを表示するには、* NetApp ONTAP tools *&gt;* Protection *&gt;* Host cluster relationships *に移動します。</block>
   <block id="88cea8a228e76d96b5b014b926e19795" category="summary">ONTAP tools for VMware vSphereリモートプラグインインターフェイスを使用して、vCenter ServerインスタンスへのVASA Providerの登録と登録解除を行うことができます。</block>
   <block id="062e7967273cea76dff9c3579a0c44db" category="doc">VASA ProviderをvCenter Serverインスタンスに登録する</block>
-  <block id="b59d64b98fd315f6b2bb4cfbeef9a7fd" category="paragraph">ONTAP tools for VMware vSphereリモートプラグインインターフェイスを使用して、vCenter ServerインスタンスへのVASA Providerの登録と登録解除を行うことができます。[VASA Provider Settings]セクションには、選択したvCenter ServerのVASA Providerの登録状態が表示されます。</block>
   <block id="711a24c1ed1e14106df5e83af675d10f" category="list-text">[設定]*&gt;*[VASA Provider settings]*を選択します。VASA Providerの登録状態がNot Registeredと表示される。</block>
   <block id="7bd80420c7575554792093f90dbbe6ed" category="list-text">[登録]*ボタンをクリックしてVASA Providerを登録します。</block>
   <block id="2a8034ce8dbfe14fabe94e3ca6c7b860" category="list-text">VASA Providerの名前を入力し、ONTAP tools for VMware vSphereアプリケーションのユーザクレデンシャルを指定して、*[登録]*をクリックします。</block>
@@ -1833,4 +1831,7 @@
   <block id="f66a3c183f0e736240b77f8b755c880e" category="list-text">Disk.QFullThreshold</block>
   <block id="19c08de7404551288e1274186e039ef4" category="list-text">Emulex FC HBAタイムアウト</block>
   <block id="d46cddda4da7ec11f17472d11df95b68" category="list-text">QLogic FC HBAタイムアウト</block>
+  <block id="a9a74d98e6d11230d876df92acb424fd" category="paragraph">vCenter ServerインスタンスをONTAP tools for VMware vSphereに追加して、vCenter Server環境内の仮想データストアを設定、管理、保護します。複数の vCenter Server インスタンスを追加する場合、ONTAP ツールと各 vCenter Server 間の安全な通信にはカスタム CA 証明書が必要です。</block>
+  <block id="56564ecb20e9cb45429b432b22f216f4" category="admonition">MPIO 設定は、NVMe、NVMe/FC、NVMe/TCP プロトコルには適用されません。</block>
+  <block id="07c9ecda15aaf26d8eef3770025ec27c" category="paragraph">VASA Providerは、ONTAP tools for VMware vSphereを使用してvCenter Serverインスタンスに登録できます。[VASA Providerの設定]セクションに、選択したvCenter ServerのVASA Providerの登録ステータスが表示されます。マルチ vCenter 展開では、各 vCenter Server インスタンスにカスタム CA 証明書があることを確認します。</block>
 </blocks>
