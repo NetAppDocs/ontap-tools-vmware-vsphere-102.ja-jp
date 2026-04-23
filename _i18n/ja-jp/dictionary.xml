@@ -534,7 +534,6 @@
   <block id="7b30cf0bf941c59665059610f32765b2" category="list-text">VMware vSphere 7リリースの場合は、VMwareサイトの手順に従って<block ref="78ea54819b62ddbcd655a4671d8a5b88" category="inline-link-rx"></block>NVMe/TCPソフトウェアアダプタを設定します。VMware vSphere 8リリースの場合は、に従って<block ref="d7f2ab4a5e61632cb53ab17b5775b973" category="inline-link-rx"></block>NVMe/TCPソフトウェアアダプタを設定します。</block>
   <block id="8fd43ee482a4e281b8feee6762fb22d2" category="inline-link-macro">ストレージシステムとホストの検出</block>
   <block id="f897e941469c1def0ceaad5904784393" category="inline-link">VMFSデータストア用にNVMe/TCPをvSphere 8.0 Update 1およびONTAP 9 VMFS.13.1で設定する方法</block>
-  <block id="9fc56e301e08de92885a49e832294c9b" category="list-text"><block ref="d7dfa373f3b590500a261c503f3d702f" category="inline-link-macro-rx"></block>ESXiホストでアクションを実行します。詳細については、を参照してください。<block ref="08964a7c7e6cd9155ed7286907a68824" category="inline-link-rx"></block></block>
   <block id="b52744b7fe6a50a639b45ebe19c17f96" category="list-text">NVMe/FCプロトコルを使用する場合は、次の手順を実行してESXiホストを設定します。</block>
   <block id="0d2e4cff54d6f550e6b15a47007a161c" category="list-text">ESXiホストでNVMe over Fabrics（NVMe-oF）を有効にします。</block>
   <block id="802068251371051bc6ae5a5f001b4460" category="list-text">SCSIゾーニングを完了します。</block>
@@ -1659,7 +1658,6 @@
   <block id="7d0ee6fed10d3d4e5c9ee496729ab519" category="doc">リリースノート</block>
   <block id="620a99069ca21ddda63311030de128d1" category="paragraph">ONTAP Tools for VMware vSphere 10.2の新機能と拡張機能について説明します。</block>
   <block id="a0f2f641913db0ffffab76fafad81203" category="inline-xref-macro">ONTAP Tools for VMware vSphere 10.2の新機能</block>
-  <block id="c796cc4c6989b5a604c6eef24c2de84d" category="paragraph">新機能と拡張機能の一覧については、を参照してください<block ref="815f650045efcb134f42d68a8e4fca4c" category="inline-xref-macro-rx"></block>。</block>
   <block id="66e41f837b141c5c933d4281f7abe97c" category="paragraph">ONTAP tools for VMware vSphere 9からONTAP tools 10.2への移行が導入環境に適しているかどうかの詳細については、を参照して<block ref="947428ca1064f8d19137fb8976698998" category="inline-xref-macro-rx"></block>ください。ONTAP tools for VMware vSphere 9.10D2、9.11D4、9.12、9.13リリースからONTAP tools 10.2への移行がサポートされます。</block>
   <block id="41dd8791118d286f9dd16dda93fb4676" category="inline-link">ONTAP Tools for VMware vSphere 10.2リリースノート</block>
   <block id="bb8eb6c356c3f564a1613f6389297778" category="paragraph">詳細については、を参照して<block ref="4c445cf2a5e8fa11ece1f426d363bfb8" category="inline-link-rx"></block>ください。リリースノートにアクセスするには、NetAppアカウントでサインインするか、アカウントを作成する必要があります。</block>
@@ -1834,4 +1832,6 @@
   <block id="a9a74d98e6d11230d876df92acb424fd" category="paragraph">vCenter ServerインスタンスをONTAP tools for VMware vSphereに追加して、vCenter Server環境内の仮想データストアを設定、管理、保護します。複数の vCenter Server インスタンスを追加する場合、ONTAP ツールと各 vCenter Server 間の安全な通信にはカスタム CA 証明書が必要です。</block>
   <block id="56564ecb20e9cb45429b432b22f216f4" category="admonition">MPIO 設定は、NVMe、NVMe/FC、NVMe/TCP プロトコルには適用されません。</block>
   <block id="07c9ecda15aaf26d8eef3770025ec27c" category="paragraph">VASA Providerは、ONTAP tools for VMware vSphereを使用してvCenter Serverインスタンスに登録できます。[VASA Providerの設定]セクションに、選択したvCenter ServerのVASA Providerの登録ステータスが表示されます。マルチ vCenter 展開では、各 vCenter Server インスタンスにカスタム CA 証明書があることを確認します。</block>
+  <block id="5d8319afdbfb500a337d6daee9e2f4d1" category="list-text">ESXiホスト上で<block ref="c076a6b54534640d64418e3f25ccabbb" category="inline-link-macro-rx"></block>アクションを実行します。詳細については、<block ref="08964a7c7e6cd9155ed7286907a68824" category="inline-link-rx"></block>を参照してください。</block>
+  <block id="1fc97a07e7c9e86fae8754d4d46be407" category="paragraph">新機能と拡張機能の完全なリストについては、<block ref="8b69af8fb592f7967dc64a5024118503" category="inline-link-macro-rx"></block>をご覧ください。</block>
 </blocks>

@@ -13,7 +13,7 @@ summary: このリリースの VMware vSphere 用 ONTAP ツールに関する重
 [role="lead"]
 ONTAP Tools for VMware vSphere 10.2の新機能と拡張機能について説明します。
 
-新機能と拡張機能の一覧については、を参照してくださいxref:whats-new-otv-102.adoc[ONTAP Tools for VMware vSphere 10.2の新機能]。
+新機能と拡張機能の完全なリストについては、link:whats-new-otv-102.html["ONTAP Tools for VMware vSphere 10.2の新機能"]をご覧ください。
 
 ONTAP tools for VMware vSphere 9からONTAP tools 10.2への移行が導入環境に適しているかどうかの詳細については、を参照してxref:ontap-tools-9-ontap-tools-10-feature-comparison.adoc[ONTAP Tools for VMware vSphere 9とONTAP Tools for VMware vSphere 10の機能比較]ください。ONTAP tools for VMware vSphere 9.10D2、9.11D4、9.12、9.13リリースからONTAP tools 10.2への移行がサポートされます。
 
